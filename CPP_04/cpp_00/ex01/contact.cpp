@@ -1,5 +1,6 @@
 #include "contact.hpp"
 #include "phonebook.hpp"
+#include <cstdlib>
 #include <iomanip>
 #include <iostream>
 #include <string>
@@ -55,10 +56,11 @@ void  contact::print(int i){
 void  contact::viewinfos(int i){
 	(void)i;
 	if (this->firstname.empty()){
-		std::cout << "\033[0;31mContact does not exist, please enter a valid index\033[0m" << std::endl;
+		std::cout << "\033[0;31mContact does not exist, try again and enter a valid index\033[0m" << std::endl;
 		return ;
 	}
 	else{
+		system("clear");
 		std::cout << "\033[2;37m:::"<< this->firstname << "'s informations:::\n\n\033[0m";
 		std::cout << "\033[0;33mFirst name\t:\033[0m " << this->firstname << std::endl;
 		std::cout << "\033[0;33mLast name\t:\033[0m " << this->lastname << std::endl;

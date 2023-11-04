@@ -10,9 +10,9 @@ class phonebook{
 	public:
 		void  intro(void);
 		void  add(void);
-		void  display(void);
 		void  search(void);
-		int  select(void);
+		int	  display(void);
+		int	  select(void);
 		
 };
 

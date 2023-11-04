@@ -5,7 +5,7 @@ int	main(){
 	std::string	input;
 	book.intro();
 	while (1){
-		std::cout << "🖊️> " << std::flush;
+		std::cout << "🖊️ > " << std::flush;
 		std::getline(std::cin, input);
 		if (std::cin.eof())
 			break ;

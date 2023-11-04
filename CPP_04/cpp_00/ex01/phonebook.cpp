@@ -25,11 +25,12 @@ void  phonebook::add(void){
 	i++;
 }
 
-void  phonebook::display(void){
+int  phonebook::display(void){
 	if (!this->nb){
 		std::cout << "\033[0;31m No contact saved, try adding contacts\033[0m\n";
-		return ;
+		return (0);
 	}
+	system("clear");
 	std::cout << "\033[0;33m-------------------Contacts------------------\033[0m" << std::endl;
 	std::cout << "|\033[2;37m  Index  \033[0m ";
 	std::cout << "|\033[2;37mFirst name\033[0m";
@@ -39,6 +40,7 @@ void  phonebook::display(void){
 	for (int i = 0; i < 8; i++){
 		this->contacts[i].print(i);
 	}
+	return (1);
 }
 
 int  phonebook::select(void){
@@ -51,7 +53,6 @@ int  phonebook::select(void){
 		if (id >= 0 && id <= 8)
 			n = 1;
 		else{
-			std::cin.clear();
 			std::cout << "\033[0;31mIndex out of range, please enter a valid one\033[0m" << std::endl;
 		}
 	}
@@ -63,9 +64,9 @@ int  phonebook::select(void){
 void  phonebook::search(void){
 	int	i;
 
-	system("clear");
-	phonebook::display();
+	if (!phonebook::display())
+		return ;
 	i = phonebook::select();
-	system("clear");
+	std::cin.ignore();
 	this->contacts[i - 1].viewinfos(i - 1);
 }

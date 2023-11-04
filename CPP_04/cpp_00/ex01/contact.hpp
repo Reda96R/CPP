@@ -15,10 +15,10 @@ class contact{
 		std::string preprinter(std::string);
 	public:
 		std::string readinput(std::string, int n);
-		void  fill(int i);
-		void  print(int i);
-		int	  check(std::string);
-		void  viewinfos(int i);
+		void		fill(int i);
+		void		print(int i);
+		int			check(std::string);
+		void		viewinfos(int i);
 };
 
 #endif
