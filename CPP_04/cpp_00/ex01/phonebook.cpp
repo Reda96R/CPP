@@ -3,6 +3,8 @@
 #include <iostream>
 #include <iomanip>
 #include <iterator>
+#include <string>
+#include <sstream>
 
 void  phonebook::intro(void){
 	system("clear");
@@ -43,22 +45,77 @@ int  phonebook::display(void){
 	return (1);
 }
 
-int  phonebook::select(void){
-	int	id;
-	int	n = 0;
+// int  phonebook::select(void){
+// 	int	id;
+// 	int	n = 0;
+//
+// 	do{
+// 		std::cout << "\n\033[0;33mEnter the contact's index: \033[0m" << std::endl;
+// 		std::cin >> id;
+// 		if (std::cin.fail()){
+// 			std::cout << "here\n";
+// 			std::cin.clear();
+// 			std::cin.ignore();
+// 		}
+// 		if (id >= 1 && id <= 8)
+// 			n = 1;
+// 		else{
+// 			std::cin.clear();
+// 			std::cin.ignore();
+// 			std::cout << "\033[0;31mIndex out of range, please enter a valid one\033[0m" << std::endl;
+// 		}
+// 	}
+// 	while (!n);
+// 	return (id);
+//
+// }
 
-	do{
-		std::cout << "\n\033[0;33mEnter the contact index: \033[0m" << std::endl;
-		std::cin >> id;
-		if (id >= 0 && id <= 8)
-			n = 1;
-		else{
-			std::cout << "\033[0;31mIndex out of range, please enter a valid one\033[0m" << std::endl;
+// int phonebook::select(void) {
+//     int id;
+//     int n = 0;
+//     bool errorDisplayed = false; // Flag to track if the error message has been displayed
+//
+//     do {
+//         if (!errorDisplayed)
+//             std::cout << "\n\033[0;33mEnter the contact's index: \033[0m" << std::endl;
+// 		std::cin >> id;
+// 		if (std::cin.fail() || id <= 0 || id > 9) {
+// 			if (!errorDisplayed){
+// 				std::cout << "\033[0;31mInvalid input, Please enter a valid input\033[0m" << std::endl;
+// 				errorDisplayed = true;
+// 			}
+// 			std::cin.clear();
+// 			std::cin.ignore(); // Clear the input buffer
+//         } else if (id >= 1 && id <= 8)
+//             n = 1; // Valid input
+//     }
+// 	while (!n);
+//     return id;
+// }
+
+int phonebook::select(void) {
+    int id;
+    int n = 0;
+	std::string input;
+    // bool errorDisplayed = false; // Flag to track if the error message has been displayed
+
+    do {
+		std::cout << "\n\033[0;33mEnter the contact's index: \033[0m" << std::endl;
+		std::getline(std::cin, input);
+		std::istringstream iss (input);
+		if (iss >> id){
+			if (id >= 1 && id <= 8)
+				n = 1; // Valid input
 		}
-	}
+		else {
+				std::cout << "\033[0;31mInvalid input, Please enter a valid input\033[0m" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(); // Clear the input buffer 
+		}
+			iss.clear();
+    }
 	while (!n);
-	return (id);
-
+    return id;
 }
 
 void  phonebook::search(void){

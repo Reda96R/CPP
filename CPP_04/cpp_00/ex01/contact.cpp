@@ -19,10 +19,12 @@ std::string contact::readinput(std::string msg, int n){
 	while (1){
 		std::cout << msg << std::flush;
 		std::getline(std::cin, input);
-		if (n)
-			i = contact::check(input);
-		if (!(std::cin.eof()) && i)
-			break ;
+		if (std::cin.good() && !input.empty()){
+			if (n)
+				i = contact::check(input);
+			if (!(std::cin.eof()) && i)
+				break ;
+		}
 		std::cout << "\033[0;31mInvalide, please try again\033[0m\n"; 
 	}
 	return (input);
