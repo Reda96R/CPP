@@ -17,8 +17,9 @@ class contact{
 		std::string readinput(std::string, int n);
 		void		fill(int i);
 		void		print(int i);
+		void		viewinfos(void);
 		int			check(std::string);
-		void		viewinfos(int i);
+		int			id_check(int id);
 };
 
 #endif

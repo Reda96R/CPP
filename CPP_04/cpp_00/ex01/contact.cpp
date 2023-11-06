@@ -19,10 +19,14 @@ std::string contact::readinput(std::string msg, int n){
 	while (1){
 		std::cout << msg << std::flush;
 		std::getline(std::cin, input);
+		if (std::cin.eof()){
+			std::cout << "\n\n\033[0;33m:::::: GOODBYE ::::::\n";
+			exit (1);
+		}
 		if (std::cin.good() && !input.empty()){
 			if (n)
 				i = contact::check(input);
-			if (!(std::cin.eof()) && i)
+			if (i)
 				break ;
 		}
 		std::cout << "\033[0;31mInvalide, please try again\033[0m\n"; 
@@ -55,20 +59,13 @@ void  contact::print(int i){
 	std::cout << "|" << std::endl;
 }
 
-void  contact::viewinfos(int i){
-	(void)i;
-	if (this->firstname.empty()){
-		std::cout << "\033[0;31mContact does not exist, try again and enter a valid index\033[0m" << std::endl;
-		return ;
-	}
-	else{
-		system("clear");
-		std::cout << "\033[2;37m:::"<< this->firstname << "'s informations:::\n\n\033[0m";
-		std::cout << "\033[0;33mFirst name\t:\033[0m " << this->firstname << std::endl;
-		std::cout << "\033[0;33mLast name\t:\033[0m " << this->lastname << std::endl;
-		std::cout << "\033[0;33mNickname\t:\033[0m " << this->nickname << std::endl;
-		std::cout << "\033[0;33mPhone number\t:\033[0m " << this->number << std::endl;
-		std::cout << "\033[0;33mDarkest secret\t:\033[0m " << this->secret << std::endl;
-		std::cout << std::endl;
-	}
+void  contact::viewinfos(void){
+	system("clear");
+	std::cout << "\033[2;37m:::"<< this->firstname << "'s informations:::\n\n\033[0m";
+	std::cout << "\033[0;33mFirst name\t:\033[0m " << this->firstname << std::endl;
+	std::cout << "\033[0;33mLast name\t:\033[0m " << this->lastname << std::endl;
+	std::cout << "\033[0;33mNickname\t:\033[0m " << this->nickname << std::endl;
+	std::cout << "\033[0;33mPhone number\t:\033[0m " << this->number << std::endl;
+	std::cout << "\033[0;33mDarkest secret\t:\033[0m " << this->secret << std::endl;
+	std::cout << std::endl;
 }
