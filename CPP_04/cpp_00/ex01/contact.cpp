@@ -45,17 +45,20 @@ void  contact::fill(int i){
 }
 
 std::string	contact::preprinter(std::string str){
-	if (str.length() > 9)
-		return (str.substr(0, 8) + ".");
+	if (str.length() > 10)
+		return (str.substr(0, 9) + ".");
 	return (str);
 }
 
 void  contact::print(int i){
 	std::string str;
-	std::cout << "|" << std::setw(5) << i + 1 << std::setw(6);
-	std::cout << "|" << (str = contact::preprinter(this->firstname)) << std::setw(11 - str.length());
-	std::cout << "|" << (str = contact::preprinter(this->lastname)) << std::setw(11 - str.length());
-	std::cout << "|" << (str = contact::preprinter(this->nickname)) << std::setw(11 - str.length());
+	std::cout << "|" << std::setw(10) << i + 1 ;
+	str = contact::preprinter(this->firstname);
+	std::cout << "|" << std::setw(10) << str;
+	str = contact::preprinter(this->lastname);
+	std::cout << "|" << std::setw(10) << str;
+	str = contact::preprinter(this->nickname);
+	std::cout << "|" << std::setw(10) << str;
 	std::cout << "|" << std::endl;
 }
 

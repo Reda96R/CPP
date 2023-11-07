@@ -35,10 +35,10 @@ int  phonebook::display(void){
 	}
 	system("clear");
 	std::cout << "\033[0;33m-------------------Contacts------------------\033[0m" << std::endl;
-	std::cout << "|\033[2;37m  Index  \033[0m ";
+	std::cout << "|\033[2;37m     Index\033[0m";
 	std::cout << "|\033[2;37mFirst name\033[0m";
 	std::cout << "|\033[2;37m Last name\033[0m";
-	std::cout << "|\033[2;37m Nickname \033[0m|";
+	std::cout << "|\033[2;37m  Nickname\033[0m|";
 	std::cout << std::endl;
 	for (int i = 0; i < 8; i++){
 		this->contacts[i].print(i);
