@@ -63,7 +63,7 @@ int phonebook::select(void) {
 			std::cout << "\n\n\033[0;33m:::::: GOODBYE ::::::\n";
 			exit (1);
 		}
-		if (this->contacts[id - 1].id_check(id - 1) && id >= 1 && id <= 8)
+		if (id >= 1 && id <= 8 && this->contacts[id - 1].id_check(id - 1))
 			break ; //valid input
 		else {
 			if (id <= 0 || id >= 9)

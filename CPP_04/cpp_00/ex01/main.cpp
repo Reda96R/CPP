@@ -7,7 +7,7 @@ int	main(){
 	while (1){
 		std::cout << "🖊️ > " << std::flush;
 		std::getline(std::cin, input);
-		if (std::cin.eof())
+		if (!std::cin.good())
 			break ;
 		if (input == "ADD")
 			book.add();
