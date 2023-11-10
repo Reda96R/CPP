@@ -1,24 +1,21 @@
 NAME = zombie
-FILES = main
+FILES = main Zombie newZombie randomChump
 OBJS_DIR = .obj/
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 CFLAGES = -Wall -Werror -Wextra -std=c++98
 CC = c++
 
-# .cpp.o:
-	# @$(CC) $(CFLAGES) -c $< -o $@
-
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@echo $(CURSIVE)$(GRAY)":::Compiling $(NAME) :::"$(NONE)
+	@echo $(CURSIVE)$(GRAY)":::Compiling $(NAME):::"$(NONE)
 	@$(CC) $(CFLAGES) $(OBJS) -o $(NAME)
 	@echo $(GREEN)":::✅ $(NAME) is ready ✅:::"$(NONE)
 
-$(OBJS_DIR)%.o: $(FILES)%.cpp
+$(OBJS_DIR)%.o: %.cpp
 	@echo $(CURSIVE)$(GRAY)":::Making object files:::"$(NONE)
 	@mkdir -p $(OBJS_DIR)
-	@CC $(CFLAGES) -c $< -o $@
+	@$(CC) $(CFLAGES) -c $< -o $@
 clean:
 	@echo $(CURSIVE)$(GRAY)":::Deleting executable:::"$(NONE)
 	@rm -rf $(OBJS_DIR)
