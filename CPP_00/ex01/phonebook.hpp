@@ -1,6 +1,13 @@
 #ifndef PHONEBOOK_H
 #define PHONEBOOK_H
 
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>
+#include <string>
+#include <iterator>
+#include <sstream>
+#include <limits>
 #include "contact.hpp"
 
 class phonebook{
