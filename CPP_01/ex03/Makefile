@@ -1,5 +1,5 @@
 NAME = violence
-FILES = main 
+FILES = main Weapon HumanA HumanB 
 OBJS_DIR = .obj/
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 CFLAGES = -Wall -Werror -Wextra -std=c++98
