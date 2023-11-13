@@ -20,7 +20,15 @@ void	Harl::error(){
 }
 
 void	Harl::complain(std::string level){
-	(void) level;
+	void (Harl::*levels[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+	std::string levelsS[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	for (int i = 0; i < 4; i++){
+		if (level == levelsS[i]){
+			(this->*levels[i])();
+			return ;
+		}
+	}
+	std::cout << "\033[0;31mError: Invalide level\033[0m" << std::endl;
 }
 
 Harl::~Harl(){
