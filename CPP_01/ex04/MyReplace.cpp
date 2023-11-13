@@ -22,7 +22,6 @@ void	MyReplace::Replacer(std::string s1, std::string s2){
 			std::exit(EXIT_FAILURE);
 		}
 		n = str.find(s1);
-	// find() returns npos when the searched substring is not found in the string
 		while (n != std::string::npos){
 			str.erase(n, s1.length());
 			str.insert(n, s2);

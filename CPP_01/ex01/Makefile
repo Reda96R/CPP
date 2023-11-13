@@ -1,4 +1,4 @@
-NAME = zombie
+NAME = Zombie
 FILES = main Zombie zombieHorde
 OBJS_DIR = .obj/
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))

@@ -1,4 +1,4 @@
-NAME = zombie
+NAME = Zombie
 FILES = main Zombie newZombie randomChump
 OBJS_DIR = .obj/
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
