@@ -2,11 +2,9 @@
 #include <cstdlib>
 
 int	main(){
-	int	N = 3;
+	int	N = 0;
 	
 	system("clear");
-	if (N <= 0)
-		return (0);
 	Zombie *Z = zombieHorde(N, "Ztest");
 	for (int i = 0; i < N; i++)
 		Z[i].announce();
