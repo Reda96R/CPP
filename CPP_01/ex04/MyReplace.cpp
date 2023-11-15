@@ -9,6 +9,10 @@ void	MyReplace::Replacer(std::string s1, std::string s2){
 	std::string		str;
 	size_t			n;
 
+	if (s1.empty() || s2.empty() || input.empty()){
+		std::cout << "\033[0;31mError: empty field\033[0m" << std::endl;
+		return ;
+	}
 	std::ifstream in(this->input.c_str());
 	if (!in.is_open()){
 		std::cerr << "\033[0;31mError opening the file\033[0m" << std::endl;
@@ -25,7 +29,7 @@ void	MyReplace::Replacer(std::string s1, std::string s2){
 		while (n != std::string::npos){
 			str.erase(n, s1.length());
 			str.insert(n, s2);
-			n = str.find(s1);
+			n = str.find(s1, n + s2.length());
 		}
 		out << str;
 		out.close();

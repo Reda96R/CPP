@@ -5,7 +5,7 @@ int	main(){
 	std::string	Z;
 	
 	system("clear");
-	std::cout << "\033[0;32mDeploying Zombie on the heap 🧟\033[0m" << std::endl;
+	std::cout << "\033[0;32mDeploying a Zombie on the heap 🧟\033[0m" << std::endl;
 	std::cout << "Enter the Zombie's name: " << std::flush;
 	std::cin >> Z;
 	Zombie *Z1 = newZombie(Z);

@@ -2,7 +2,7 @@
 #include <cstdlib>
 
 int	main(){
-	int	N = 0;
+	int	N = 3;
 	
 	system("clear");
 	Zombie *Z = zombieHorde(N, "Ztest");
