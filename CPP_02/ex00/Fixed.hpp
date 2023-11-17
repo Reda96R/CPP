@@ -10,7 +10,7 @@ class Fixed{
 	public:
 		Fixed();
 		Fixed& operator=( const Fixed &oldO );
-		//add a copy constructer
+		Fixed ( const Fixed &oldO );
 		~Fixed();
 		
 		void	setRawBits (int const raw );
