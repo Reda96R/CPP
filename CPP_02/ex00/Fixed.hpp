@@ -9,8 +9,8 @@ class Fixed{
 		int	  value;
 	public:
 		Fixed();
-		Fixed& operator=( const Fixed &oldO );
 		Fixed ( const Fixed &oldO );
+		Fixed& operator=( const Fixed &oldO );
 		~Fixed();
 		
 		void	setRawBits (int const raw );
