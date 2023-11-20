@@ -32,9 +32,11 @@ void	Fixed::setRawBits(int const raw){
 }
 
 float	Fixed::toFloat() const{
+	return (static_cast<float>(this->getRawBits()) / (1 << fracional)); // needs a recheck
 }
 
 int	  Fixed::toInt() const{
+	return (this->value >> fracional); // need to understand this one more
 }
 
 Fixed::~Fixed(){
