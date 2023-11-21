@@ -5,6 +5,14 @@ Fixed::Fixed(){
 	this->value = 0;
 }
 
+Fixed::Fixed(const int n) : value(n << fracional){
+	std::cout << "Int constructor called" << std::endl;
+}
+
+Fixed::Fixed(const float n) : value(roundf(n * (1 << fracional))){
+	std::cout << "Float constructor called" << std::endl;
+}
+
 Fixed::Fixed(const Fixed &oldO){
 	std::cout << "Copy constructer called" << std::endl;
 	*this = oldO;
@@ -23,7 +31,6 @@ std::ostream& operator<<(std::ostream& out, Fixed const& f){
 }
 
 int	Fixed::getRawBits( void ) const{
-	std::cout << "getRawBits member function called" << std::endl;
 	return (this->value);
 }
 
@@ -32,11 +39,11 @@ void	Fixed::setRawBits(int const raw){
 }
 
 float	Fixed::toFloat() const{
-	return (static_cast<float>(this->getRawBits()) / (1 << fracional)); // needs a recheck
+	return (static_cast<float>(this->getRawBits()) / (1 << fracional)); // static_cast
 }
 
 int	  Fixed::toInt() const{
-	return (this->value >> fracional); // need to understand this one more
+	return (this->value >> fracional);
 }
 
 Fixed::~Fixed(){
