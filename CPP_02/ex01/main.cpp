@@ -1,4 +1,5 @@
 #include "Fixed.hpp"
+#include <iomanip>
 
 int main( void ) {
 	Fixed a;
