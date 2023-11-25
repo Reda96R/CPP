@@ -31,19 +31,6 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name){
 	std::cout << "--FragTrap-- > " << this->name << " is alive!" << std::endl;
 }
 
-void	FragTrap::attack(const std::string& target){
-	if (this->hitPoints){
-		if (this->energyPoints){
-			this->energyPoints--;
-			std::cout << "--FragTrap-- > " << this->name << " injured " << target << ", causing " << this->attackDamage << " points of damage!" << std::endl;
-		}
-		else
-			std::cout << "--FragTrap-- > " << this->name << "does not have enough energy!" << std::endl;
-		return ;
-	}
-	std::cout << "--FragTrap-- > " << this->name << " \033[0;31mis dead!\033[0m" << std::endl;
-}
-
 void	FragTrap::highFivesGuys(){
 	std::cout << "--FragTrap-- > " << this->name << " high five guys 🖐️" << std::endl;
 }
