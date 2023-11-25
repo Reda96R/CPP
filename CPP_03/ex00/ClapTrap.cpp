@@ -1,5 +1,4 @@
 #include "ClapTrap.hpp"
-#include <ostream>
 
 ClapTrap::ClapTrap(std::string name) : name(name), hitPoints(10), energyPoints(10), attackDamage(0){
 	std::cout<< "ClapTrap " << name << " is deployed" << std::endl;
@@ -36,33 +35,39 @@ void	ClapTrap::attack(const std::string& target){
 
 void	ClapTrap::takeDamage(unsigned int amount){
 	if (this->hitPoints){
-		if (this->hitPoints >= amount)
+		if (this->hitPoints > amount){
 			this->hitPoints -= amount;
-		//handle the case where amount > hitpoints
-		std::cout << "ClapTrap " << this->name << " takes " << amount << " damage!" << std::endl;
-		if (!this->hitPoints)
+			std::cout << "ClapTrap " << this->name << " takes " << amount << " damage!" << std::endl;
+		}
+		else{
+			this->hitPoints = 0;
 			std::cout << "ClapTrap " << this->name << " \033[0;31mdied!\033[0m" << std::endl;
+		}
 		return ;
 	}
 	std::cout << "ClapTrap " << this->name << " \033[0;31mis dead!\033[0m" << std::endl;
 }
 
 void	ClapTrap::beRepaired(unsigned int amount){
-	if (this->energyPoints > 0 && this->hitPoints > 0){
-		if (this->energyPoints + amount > 10)
-			std::cout << "ClapTrap " << this->name << " already reached maximum hitpoints!" << std::endl;
-		else{
-			this->hitPoints += amount;
-			this->energyPoints--;
-			std::cout << "ClapTrap " << name << " repaired itself in exchange of " << amount << " hit points!" << std::endl;
+	if (this->hitPoints){
+		if (this->energyPoints){
+			if (this->hitPoints == 10 || this->hitPoints + amount >= 10){
+				if (this->hitPoints < 10)
+					this->energyPoints--;
+				this->hitPoints = 10;
+				std::cout << "ClapTrap " << this->name << " reached maximum hitpoints!" << std::endl;
+			}
+			else {
+				this->hitPoints += amount;
+				this->energyPoints--;
+				std::cout << "ClapTrap " << name << " repaired itself in exchange of " << amount << " hit points!" << std::endl;
+			}
 		}
+		else
+			std::cout << "ClapTrap " << this->name << " does not have enough energy!" << std::endl;
 		return ;
 	}
-	if (this->hitPoints <= 0){
-		std::cout << "ClapTrap " << this->name << " \033[0;31mis dead!\033[0m" << std::endl;
-		return ;
-	}
-	std::cout << "ClapTrap " << this->name << " does not have enough energy!" << std::endl;
+	std::cout << "ClapTrap " << this->name << " \033[0;31mis dead!\033[0m" << std::endl;
 }
 
 ClapTrap::~ClapTrap(){
