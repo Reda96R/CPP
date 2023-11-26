@@ -24,6 +24,6 @@ Animal::~Animal(){
 	std::cout << this->type << " destructor called" << std::endl;
 }
 
-void	Animal::getType() const{
-	return (this->type);
-}
+// void	Animal::getType() const{
+// 	return (this->type);
+// }
