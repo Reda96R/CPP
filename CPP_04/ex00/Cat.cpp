@@ -1,5 +1,4 @@
 #include "Cat.hpp"
-#include "Animal.hpp"
 
 Cat::Cat() : Animal("Cat"){
 	std::cout << "🐈 " << this->type << " constructer called" << std::endl;

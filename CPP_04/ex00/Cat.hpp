@@ -7,7 +7,7 @@ class Cat : public Animal{
 	private:
 	
 	public:
-		Cat();
+		Cat( void );
 		Cat( const Cat& f);
 		Cat&  operator=( const Cat& f);
 		~Cat();
