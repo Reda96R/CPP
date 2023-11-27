@@ -1,5 +1,5 @@
 NAME = Animal
-FILES = main Cat Dog 
+FILES = main Animal Cat Dog 
 OBJS_DIR = .obj/
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
