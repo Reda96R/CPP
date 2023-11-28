@@ -8,15 +8,13 @@ int main()
 {
 	std::cout << "::::::::::Basic test::::::::::" << std::endl;
 	std::cout << std::endl;
-	const Animal* meta = new Animal();
+	// Animal test;
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
 	i->makeSound(); //will output the cat sound!
 	j->makeSound();
-	meta->makeSound();
 	delete (i);
 	delete (j);
-	delete (meta);
 
 	// std::cout << std::endl;
 	// 

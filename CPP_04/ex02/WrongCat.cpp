@@ -1,34 +1,25 @@
-#include "Cat.hpp"
+#include "WrongCat.hpp"
 
-Cat::Cat() : Animal("Cat"){
+WrongCat::WrongCat() : WrongAnimal("WrongCat"){
 	std::cout << "🐈 " << this->type << " constructer called" << std::endl;
-	this->brain = new Brain();
 }
 
-Cat::Cat(const Cat& f) : Animal("Cat"){
+WrongCat::WrongCat(const WrongCat& f) : WrongAnimal("WrongCat"){
 	std::cout << "🐈 " << this->type << " copy constructer called" << std::endl;
 	*this = f;
 }
 
-Cat&  Cat::operator=(const Cat& rhs){
+WrongCat&  WrongCat::operator=(const WrongCat& rhs){
 	std::cout << "🐈 " << this->type << " copy assignment operator called" << std::endl;
 	if (this != &rhs)
-	{
 		this->type = rhs.type;
-		this->brain = new Brain(*rhs.brain);
-	}
 	return (*this);
 }
 
-void	Cat::makeSound() const{
+void	WrongCat::makeSound() const{
 	std::cout << "🐈 Meow!" << std::endl;
 }
 
-Brain*	Cat::getBrain() const{
-	return (this->brain);
-}
-
-Cat::~Cat(){
-	delete this->brain;
+WrongCat::~WrongCat(){
 	std::cout << "🐈 " << this->type << " destructor called" << std::endl;
 }
