@@ -1,10 +1,16 @@
 #include "Bureaucrat.hpp"
 
-int	main(void){
+int	main( void ){
 	try{
-		/* do some stuff with bureaucrats */
+		Bureaucrat B("b0", 1);
+		B.decrementGrade();
+		B.incrementGrade();
+		std::cout << B << std::endl;
 	}
-catch (std::exception & e) {
-		/* handle exception */ 
+	catch (Bureaucrat::GradeTooLowException &e) {
+		std::cout << e.what() << std::endl;
+	}
+	catch (Bureaucrat::GradeTooHighException &e) {
+		std::cout << e.what() << std::endl;
 	}
 }

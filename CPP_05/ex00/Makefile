@@ -1,5 +1,5 @@
 NAME = Bureaucrat
-FILES = main.cpp 
+FILES = main Bureaucrat 
 OBJS_DIR = .obj/
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
