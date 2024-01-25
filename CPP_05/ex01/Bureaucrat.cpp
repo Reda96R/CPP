@@ -24,6 +24,16 @@ std::ostream& operator<<( std::ostream& o, const Bureaucrat& rhs ){
 	return (o);
 }
 
+void	Bureaucrat::signForm( Form &form ){
+	try{
+		form.beSigned(*this);
+		std::cout << *this << " \033[0;32msigned\033[0m " << form.getName() << std::endl;
+	}
+	catch(Form::GradeTooLowException &e){
+		std::cout << this->name << " \033[0;31mcouldn't sign\033[0m " << form.getName() << " because " << e.what() << std::endl;
+	}
+}
+
 std::string	  Bureaucrat::getName( void ) const{
 	return (this->name);
 }
