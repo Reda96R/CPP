@@ -1,4 +1,4 @@
-#include "Bureaucrat.hpp"
+#include "includes/Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat( void ){
 }
@@ -7,7 +7,7 @@ Bureaucrat::Bureaucrat( const std::string& name, int grade ) : name(name), grade
 	if (this->grade > 150)
 		throw Bureaucrat::GradeTooLowException();
 	if (this->grade < 1)
-		throw Bureaucrat::GradeTooHighException();
+		throw GradeTooHighException();
 }
 
 Bureaucrat::Bureaucrat( const Bureaucrat& src ) : name(src.name), grade(src.grade){
@@ -34,13 +34,13 @@ int			  Bureaucrat::getGrade( void ) const{
 
 void		  Bureaucrat::incrementGrade( void ){
 	if (this->grade - 1 < 1)
-		throw Bureaucrat::GradeTooHighException();
+		throw GradeTooHighException();
 	--this->grade;
 }
 
 void		Bureaucrat::decrementGrade( void ){
 	if (this->grade + 1 > 150)
-		throw Bureaucrat::GradeTooLowException();
+		throw GradeTooLowException();
 	++this->grade;
 }
 

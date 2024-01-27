@@ -3,6 +3,7 @@ FILES = main Bureaucrat
 OBJS_DIR = .obj/
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
+INCLUDES = -I includes
 CC = c++
 
 all: $(NAME)
@@ -15,7 +16,7 @@ $(NAME): $(OBJS)
 $(OBJS_DIR)%.o: %.cpp
 	@echo $(CURSIVE)$(GRAY)":::Making object files:::"$(NONE)
 	@mkdir -p $(OBJS_DIR)
-	@$(CC) $(CPPFLAGS) -c $< -o $@
+	@$(CC) $(INCLUDES) $(CPPFLAGS) -c $< -o $@
 clean:
 	@echo $(CURSIVE)$(GRAY)":::Deleting executable:::"$(NONE)
 	@rm -rf $(OBJS_DIR)

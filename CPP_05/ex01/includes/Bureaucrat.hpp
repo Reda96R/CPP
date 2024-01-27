@@ -4,7 +4,7 @@
 # include <iostream>
 # include "Form.hpp"
 
-class Form;
+class Form; // investigate more about this
 
 class Bureaucrat{
 	private:
@@ -18,22 +18,23 @@ class Bureaucrat{
 		Bureaucrat& operator=( const Bureaucrat& rhs );
 		~Bureaucrat( void );
 
-		std::string	  getName( void ) const;
-		int			  getGrade( void ) const;
-		void		  incrementGrade( void );
-		void		  decrementGrade( void );
+		std::string	  getName() const;
+		int			  getGrade() const;
+		void		  incrementGrade();
+		void		  decrementGrade();
 		void		  signForm( Form& form );
-	//add be signed	
-		class GradeTooLowException : public std::exception{
-			public:
-				virtual const char*	what() const throw(){
-					return ("\033[0;31mGrade too low\033[0m");
-				}
-		};
+		
+	
 		class GradeTooHighException : public std::exception{
 			public:
 				virtual const char*	what() const throw(){
 					return ("\033[0;31mGrade too high\033[0m");
+				}
+		};
+		class GradeTooLowException : public std::exception{
+			public:
+				virtual const char*	what() const throw(){
+					return ("\033[0;31mGrade too low\033[0m");
 				}
 		};
 };

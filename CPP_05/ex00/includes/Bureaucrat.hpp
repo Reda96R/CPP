@@ -20,18 +20,19 @@ class Bureaucrat{
 		void		  incrementGrade();
 		void		  decrementGrade();
 		
-		class GradeTooLowException : public std::exception{
-			public:
-				virtual const char*	what() const throw(){
-					return ("\033[0;31mGrade too low\033[0m");
-				}
-		};
-		class GradeTooHighException : public std::exception{
-			public:
-				virtual const char*	what() const throw(){
-					return ("\033[0;31mGrade too high\033[0m");
-				}
-		};
+	
+	class GradeTooHighException : public std::exception{
+		public:
+			virtual const char*	what() const throw(){
+				return ("\033[0;31mGrade too high\033[0m");
+			}
+	};
+	class GradeTooLowException : public std::exception{
+		public:
+			virtual const char*	what() const throw(){
+				return ("\033[0;31mGrade too low\033[0m");
+			}
+	};
 };
 
 std::ostream&	operator<<(std::ostream& o, const Bureaucrat& rhs);
