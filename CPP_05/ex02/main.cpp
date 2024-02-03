@@ -5,21 +5,47 @@
 
 int	main( void ){
 	try{
-		Bureaucrat B("b0", 2);
-		Bureaucrat B1("b0", 150);
-		B.incrementGrade();
+		// ===============================================
+		Bureaucrat B("B", 2);
+		Bureaucrat B1("B1", 150);
 		std::cout << B << std::endl;
-		ShrubberyCreationForm S("s");
+		std::cout << B1 << std::endl;
+		std::cout << std::endl;
+
+		// ===============================================
+		PresidentialPardonForm P("P");
+		std::cout << P << std::endl;
 		RobotomyRequestForm R("R");
-		PresidentialPardonForm P("p");
-		B.signForm(S);
+		std::cout << R << std::endl;
+		ShrubberyCreationForm S("S");
+		std::cout << S << std::endl;
+
+		// ===============================================
+		std::cout << ":::Unsigned forms:::" << std::endl;
+		B.executeForm(P);
+		B.executeForm(R);
 		B.executeForm(S);
-		// B.signForm(R);
-		// B.executeForm(R);
-		// B.signForm(P);
-		// B.executeForm(P);
-		// std::cout << F << std::endl;
-		// B.signForm(F);
+		std::cout << std::endl;
+
+		// ===============================================
+		B.signForm(P);
+		B.signForm(R);
+		B.signForm(S);
+		std::cout << std::endl;
+
+		// ===============================================
+		std::cout << ":::Low grade:::" << std::endl;
+		B1.executeForm(P);
+		B1.executeForm(R);
+		B1.executeForm(S);
+		std::cout << std::endl;
+
+		// ===============================================
+		std::cout << ":::Form execution:::" << std::endl;
+		B.executeForm(S);
+		B.executeForm(R);
+		B.executeForm(P);
+		std::cout << std::endl;
 	}
 	catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
