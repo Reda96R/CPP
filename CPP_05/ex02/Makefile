@@ -1,5 +1,5 @@
 NAME = Bureaucrat
-FILES = main Bureaucrat Form
+FILES = main Bureaucrat AForm PresidentialPardonForm RobotomyRequestForm ShrubberyCreationForm
 OBJS_DIR = .obj/
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
