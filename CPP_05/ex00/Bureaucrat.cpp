@@ -16,7 +16,7 @@ Bureaucrat::Bureaucrat( const Bureaucrat& src ) : name(src.name), grade(src.grad
 Bureaucrat& Bureaucrat::operator=( const Bureaucrat& rhs ){
 	if (this != &rhs)
 		this->grade = rhs.grade;
-	return *this;
+	return (*this);
 }
 
 std::ostream& operator<<( std::ostream& o, const Bureaucrat& rhs ){

@@ -4,7 +4,7 @@
 # include <iostream>
 # include "Form.hpp"
 
-class Form; // investigate more about this
+class Form;
 
 class Bureaucrat{
 	private:

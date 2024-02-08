@@ -2,12 +2,12 @@
 
 int	main( void ){
 	try{
-		Bureaucrat B("b0", 2);
-		B.incrementGrade();
-		std::cout << B << std::endl;
+		Bureaucrat B0("b0", 2);
+		// B0.incrementGrade();
+		std::cout << B0 << std::endl;
 		Form F("f0", 1, 1);
 		std::cout << F << std::endl;
-		B.signForm(F);
+		B0.signForm(F);
 	}
 	catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
