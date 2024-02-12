@@ -3,7 +3,7 @@ FILES = main Base
 OBJS_DIR = .obj/
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
-INCLUDES = -I includes
+INCLUDES = #-I includes
 CC = c++
 
 all: $(NAME)
