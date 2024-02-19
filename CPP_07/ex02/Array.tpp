@@ -60,7 +60,7 @@ unsigned int Array<T>::size( void ) const{
 //::::::::::::::::::deconstructor:::::::::::::::::::::::::
 template <typename T>
 Array<T>::~Array( void ){
-	delete[] this->array; //check the []
+	delete[] this->array;
 }
 
 #endif
