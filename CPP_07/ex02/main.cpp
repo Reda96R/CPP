@@ -1,4 +1,5 @@
 #include "Array.hpp"
+#include <stdlib.h>
 
 int	main( void ){
 
@@ -42,10 +43,7 @@ int	main( void ){
 	return (0);
 }
 
-// #include <iostream>
-// #include <stdlib.h>
-// #include "Array.hpp"
-//
+
 // #define MAX_VAL 750
 // int main(int, char**)
 // {

@@ -14,4 +14,10 @@ void	iter( T* array, size_t lenght, void (*f)(const T& ) ){
 		f(array[i]);
 }
 
+template < typename T >
+void	iter( T* array, size_t lenght, void (*f)(T&) ){
+	for (size_t i = 0; i < lenght; i++)
+		f(array[i]);
+}
+
 #endif
