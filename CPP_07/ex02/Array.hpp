@@ -6,14 +6,15 @@
 template< typename T >
 class Array{
 	private:
-		unsigned int	lenght;
+		unsigned int	lengh;
 		T*				array;
 	public:
 		Array( void );
 		Array( unsigned int n );
 		Array( const Array& src);
 		Array& operator=( const Array& rhs );
-		Array& operator[]( unsigned int n ) const;
+		const T& operator[]( unsigned int n ) const;
+		T& operator[]( unsigned int n );
 		~Array( void );
 
 		unsigned int size( void ) const;
@@ -25,5 +26,6 @@ class Array{
 				}
 		};
 };
+
 #include "Array.tpp"
 #endif
