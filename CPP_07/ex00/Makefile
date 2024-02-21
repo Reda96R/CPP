@@ -1,4 +1,4 @@
-NAME = Templates 
+NAME = Whatever 
 FILES = main
 OBJS_DIR = .obj/
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))

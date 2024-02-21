@@ -29,10 +29,10 @@ template <typename  T>
 Array<T>& Array<T>::operator=( const Array<T>& rhs){
 	if (this != &rhs){
 		delete[] this->array;
-	this->array = new T[rhs.lengh];
-	this->lengh = rhs.lengh;
-	for (unsigned int i = 0; i < this->lengh; i++)
-		this->array[i] = rhs.array[i];
+		this->array = new T[rhs.lengh];
+		this->lengh = rhs.lengh;
+		for (unsigned int i = 0; i < this->lengh; i++)
+			this->array[i] = rhs.array[i];
 	}
 	return (*this);
 }

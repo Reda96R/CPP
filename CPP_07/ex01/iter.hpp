@@ -8,14 +8,8 @@ void	printer(const T& o ){
 	std::cout << o << std::endl;
 }
 
-template < typename T >
-void	iter( T* array, size_t lenght, void (*f)( const T&) ){
-	for (size_t i = 0; i < lenght; i++)
-		f(array[i]);
-}
-
-template < typename T >
-void	iter( T* array, size_t lenght, void (*f)( T&) ){
+template < typename T, typename U>
+void	iter( T* array, size_t lenght, void (*f)( U&) ){
 	for (size_t i = 0; i < lenght; i++)
 		f(array[i]);
 }
