@@ -7,9 +7,6 @@ int	main( void ){
 	v.push_back(1);
 	v.push_back(2);
 	v.push_back(3);
-
-	std::cout << v.size() << std::endl;
-	std::cout << v.capacity() << std::endl;
 	try{
 		std::cout << easyfind(v, 3) << std::endl;
 		// std::cout << easyfind(v, 4) << std::endl;
@@ -32,8 +29,8 @@ int	main( void ){
 	catch ( std::exception& e ){
 		std::cerr << "\033[0;31mError: " << e.what() << "\033[0m" << std::endl;
 	}
-
 	std::cout << std::endl;
+
 	std::cout << "\033[0;33m:::::::::::::::::Deque::::::::::::::::::::::::\033[0m" << std::endl;
 	std::deque<int> d;
 	d.push_back(0);
