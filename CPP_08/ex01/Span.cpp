@@ -21,17 +21,22 @@ Span& Span::operator=( const Span& rhs ){
 	return (*this);
 }
 
-
 //::::::::::::::::::methods:::::::::::::::::::::::::
-void	Span::addNumber( unsigned int n ){
-	if (this->v.size() > n )
-		throw (std::out_of_range("\033[0;31mvector is full!\033[0m"));
-	v.push_back( n );
+void	Span::addNumber( unsigned int nbr ){
+	if (this->v.size() >= this->n )
+		throw (std::out_of_range("vector is full!"));
+	v.push_back( nbr );
+}
+
+void	Span::addRange( std::vector<int>::const_iterator s, std::vector<int>::const_iterator e ){
+	if (this->v.size() >= this->n )
+		throw (std::out_of_range("vector is full!"));
+	this->v.insert( this->v.end(), s, e);
 }
 
 int  Span::longestSpan( void ) const{
 	if (this->v.size() < 2)
-		throw (std::out_of_range("\033[0;31mvector is empty!\033[0m"));
+		throw (std::out_of_range("amount of numbers is not enough!"));
 	std::vector<int> tmp(v);
 	std::sort(tmp.begin(), tmp.end());
 	return (tmp.back() - tmp.front());
@@ -39,13 +44,10 @@ int  Span::longestSpan( void ) const{
 
 int	Span::shortestSpan( void ) const{
 	if (this->v.size() < 2)
-		throw (std::out_of_range("\033[0;31mvector is empty!\033[0m"));
+		throw (std::out_of_range("amount of numbers is not enough!"));
 	int	minSpan = Span::longestSpan();
-	int span;
-	std::vector<int> tmp(v);
-	std::sort(tmp.begin(), tmp.end());
-	for (size_t i = 1; i < tmp.size(); i++){
-		span = tmp[i] - tmp[i - 1];
+	for (size_t i = 1; i < v.size(); ++i){
+		int span = v[i] - v[i - 1];
 		if (span < minSpan)
 			minSpan = span;
 	}

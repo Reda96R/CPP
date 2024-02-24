@@ -8,7 +8,7 @@
 class Span{
 	private:
 		std::vector<int>	  v;
-		unsigned int	  n;
+		unsigned int		  n;
 
 	public:
 		Span( void );
@@ -18,10 +18,9 @@ class Span{
 		~Span( void );
 
 		void	addNumber( unsigned int n );
+		void	addRange( std::vector<int>::const_iterator s, std::vector<int>::const_iterator e );
 		int		longestSpan( void ) const;
 		int		shortestSpan( void ) const;
-
-		//TO DO: adding a way to ill Span using a range of iterators 
 };
 
 #endif
