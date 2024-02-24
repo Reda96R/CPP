@@ -45,9 +45,9 @@ int  Span::longestSpan( void ) const{
 int	Span::shortestSpan( void ) const{
 	if (this->v.size() < 2)
 		throw (std::out_of_range("amount of numbers is not enough!"));
-	int	minSpan = Span::longestSpan();
+	unsigned int	minSpan = Span::longestSpan();
 	for (size_t i = 1; i < v.size(); ++i){
-		int span = v[i] - v[i - 1];
+		unsigned int span = std::abs(v[i] - v[i - 1]);
 		if (span < minSpan)
 			minSpan = span;
 	}
