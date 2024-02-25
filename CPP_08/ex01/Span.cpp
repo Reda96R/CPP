@@ -34,7 +34,7 @@ void	Span::addRange( std::vector<int>::const_iterator s, std::vector<int>::const
 	this->v.insert( this->v.end(), s, e);
 }
 
-int  Span::longestSpan( void ) const{
+unsigned int  Span::longestSpan( void ) const{
 	if (this->v.size() < 2)
 		throw (std::out_of_range("amount of numbers is not enough!"));
 	std::vector<int> tmp(v);
@@ -42,7 +42,7 @@ int  Span::longestSpan( void ) const{
 	return (tmp.back() - tmp.front());
 }
 
-int	Span::shortestSpan( void ) const{
+unsigned int	Span::shortestSpan( void ) const{
 	if (this->v.size() < 2)
 		throw (std::out_of_range("amount of numbers is not enough!"));
 	unsigned int	minSpan = Span::longestSpan();

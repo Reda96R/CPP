@@ -19,8 +19,8 @@ class Span{
 
 		void	addNumber( unsigned int n );
 		void	addRange( std::vector<int>::const_iterator s, std::vector<int>::const_iterator e );
-		int		longestSpan( void ) const;
-		int		shortestSpan( void ) const;
+		unsigned int		longestSpan( void ) const;
+		unsigned int		shortestSpan( void ) const;
 };
 
 #endif
