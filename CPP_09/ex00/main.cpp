@@ -4,7 +4,6 @@
 #include <string>
 
 int	main( int ac, char *av[] ){
-	(void)av;
 	if (ac != 2){
 		std::cerr << "\033[0;31mError: Invalid input\033[0m" << std::endl;
 		std::cerr << "\033[0;32m\tUsage: ./btc <Input.txt>\033[0m" << std::endl;
@@ -15,7 +14,7 @@ int	main( int ac, char *av[] ){
     std::ifstream	  input(av[1], std::ifstream::in);
 
 	if (!input.is_open()){
-		std::cerr << "\033[0;31mError: Unable to open provided file!\033[0m" << std::endl;
+		std::cerr << "\033[0;31mError: Unable to open " << av[1] << "\033[0m" << std::endl;
 		return (1);
 	}
 	if (input.peek() == std::ifstream::traits_type::eof()){
@@ -30,7 +29,7 @@ int	main( int ac, char *av[] ){
 	while (std::getline(input, line)){
 		size_t	delimiter = line.find('|');
 		if (delimiter == std::string::npos || line.length() < delimiter + 2){
-			std::cerr << "\033[0;31mError: bad input => " << line << "\033[0m" << std::endl;
+			std::cerr << "\033[0;31mError: Bad input => " << line << "\033[0m" << std::endl;
 			continue ;
 		}
 		std::string	  price = btc.trim(line.substr(delimiter + 1));

@@ -1,11 +1,12 @@
 #include "BitcoinExchange.hpp"
 #include <algorithm>
+#include <cctype>
 #include <cstddef>
 #include <sstream>
 #include <string>
 
 //::::::::::::::::::constructors:::::::::::::::::::::::::
-//filling the reference dataBase
+//filling the internal dataBase
 BitcoinExchange::BitcoinExchange( void ){
 	size_t			delimiter;
 	std::string		line;
@@ -38,6 +39,8 @@ BitcoinExchange& BitcoinExchange::operator=( const BitcoinExchange& rhs ){
 }
 
 //::::::::::::::::::methods:::::::::::::::::::::::::
+
+//------------------helpers-------------------------
 double	  BitcoinExchange::toDouble( const std::string& str ){
 	double	n;
 
@@ -49,8 +52,8 @@ double	  BitcoinExchange::toDouble( const std::string& str ){
 bool  BitcoinExchange::allDigits(const std::string& str) {
 	for (unsigned int i = 0; i < str.length(); ++i)
         if (!isdigit(str[i]))
-            return false;
-    return true;
+            return (false);
+    return (true);
 }
 
 std::string	  BitcoinExchange::trim( const std::string& str ){
@@ -64,11 +67,16 @@ std::string	  BitcoinExchange::trim( const std::string& str ){
 	return (str.substr(start, (end - start + 1)));
 }
 
+//------------------checkers-------------------------
 bool	BitcoinExchange::dateIsValid( const std::string& date){
-	if (date.empty() || date.length() != 10)
+	if (date.empty() || date.length() != 10){
+		std::cerr << "\033[0;31mError: Bad input => " << date << "\033[0m" << std::endl;
 		return (false);
-	if (date[4] != '-' || date[7] != '-')
+	}
+	if (date[4] != '-' || date[7] != '-'){
+		std::cerr << "\033[0;31mError: Bad input => " << date << "\033[0m" << std::endl;
 		return (false);
+	}
 	
 	std::string	  year = date.substr(0, 4);
 	std::string	  month = date.substr(5, 2);
@@ -76,8 +84,10 @@ bool	BitcoinExchange::dateIsValid( const std::string& date){
 	int			  nYear;
 	int			  nMonth;
 	int			  nDay;
-	if (!allDigits(year) || !allDigits(month) || !allDigits(day))
+	if (!allDigits(year) || !allDigits(month) || !allDigits(day)){
+		std::cerr << "\033[0;31mError: Bad input => " << date << "\033[0m" << std::endl;
 		return (false);
+	}
 
     std::stringstream sYear(year);
     std::stringstream sMonth(month);
@@ -88,22 +98,26 @@ bool	BitcoinExchange::dateIsValid( const std::string& date){
 	sDay >> nDay;
 	if (nYear > 2022 || nYear < 2009 ||
 		nMonth > 12 || nMonth < 1 ||
-		nDay > 31 || nDay < 1)
+		nDay > 31 || nDay < 1){
+		std::cerr << "\033[0;31mError: Bad input => " << date << "\033[0m" << std::endl;
 		return (false);
+	}
 	// if (nMonth == 2){
 	//	if (nDay > 29)
 	//	  return (false);
 	// 	//To DO: check leap year
 	// }
 	if ((nMonth == 4 || nMonth == 6 || nMonth == 9 || nMonth == 11) &&
-		 nDay > 30)
+		 nDay > 30){
+		std::cerr << "\033[0;31mError: Invalid date => " << date << "\033[0m" << std::endl;
 		return (false);
+	}
 
 	return (true);
 }
 
 bool	BitcoinExchange::priceIsValid( const std::string& price ){
-	if (price.empty() || price.find_first_not_of("0123456789.-") != std::string::npos){
+	if (price.empty() || price.find_first_not_of("0123456789.-+") != std::string::npos){
 		std::cerr << "\033[0;31mError: Invalid price => " << price << "\033[0m" << std::endl;
 		return (false);
 	}
@@ -111,9 +125,15 @@ bool	BitcoinExchange::priceIsValid( const std::string& price ){
 		std::cerr << "\033[0;31mError: Not a positive number!\033[0m" << std::endl;
 		return (false);
 	}
+	else if(price.at(0) == '+' && !std::isdigit(price.at(1))){
+		std::cerr << "\033[0;31mError: Wrong number format => " << price << "\033[0m" << std::endl;
+		return (false);
+	}
 	if (std::find(price.begin(), price.end(), '.') != price.end()){
-		if (price.at(0) == '.')
+		if (price.at(0) == '.' || ((std::count(price.begin(), price.end(), '.')) > 1)){
+			std::cerr << "\033[0;31mError: Wrong number format => " << price << "\033[0m" << std::endl;
 			return (false);
+		}
 	}
 	if (price.length() > 10 || (price.length() == 10 && price > "2147483647")){
 		std::cerr << "\033[0;31mError: Too large a number!\033[0m" << std::endl;
