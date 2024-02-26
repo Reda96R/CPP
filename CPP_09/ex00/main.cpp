@@ -1,7 +1,4 @@
 #include "BitcoinExchange.hpp"
-#include <cstddef>
-#include <fstream>
-#include <string>
 
 int	main( int ac, char *av[] ){
 	if (ac != 2){
@@ -34,8 +31,14 @@ int	main( int ac, char *av[] ){
 		}
 		std::string	  price = btc.trim(line.substr(delimiter + 1));
 		std::string	  date = btc.trim(line.substr(0, delimiter));
-		if (!btc.dateIsValid(date) || !btc.priceIsValid(price)){
+		if (!btc.dateIsValid(date) || !btc.priceIsValid(price))
 			continue ;
-		}
+		std::stringstream sPrice(price);
+		double nPrice;
+		sPrice >> nPrice;
+		std::cout << date << " => " << nPrice << std::endl;
 	}
+	input.close();
+	//TODO: close internal database
+	return (0);
 }

@@ -5,6 +5,8 @@
 # include <fstream>
 # include <map>
 # include <cstdlib>
+# include <algorithm>
+# include <sstream>
 
 
 class BitcoinExchange{
@@ -22,6 +24,7 @@ class BitcoinExchange{
 		bool		allDigits(const std::string& str);
 		bool		dateIsValid( const std::string& date );
 		bool		priceIsValid( const std::string& price );
+		bool		leapYear( unsigned int day, unsigned int year );
 };
 
 #endif // !BITCOINEXCHANGE_HPP
