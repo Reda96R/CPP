@@ -2,7 +2,9 @@
 # define RPN_HPP
 
 # include <iostream>
+# include <algorithm>
 # include <stack>
+# include <sstream>
 
 class RPN{
 	private:
@@ -13,7 +15,14 @@ class RPN{
 		RPN& operator=( const RPN& rhs );
 		~RPN( void );
 
-		void	calculator( std::string input );
+		void	calculator( const std::string& input );
+		int		toInt( const std::string& str );
+		
+		int		add( int a, int b );
+		int		mult( int a, int b );
+		int		sub( int a, int b );
+		int		div( int a, int b );
+		int		pow( int a, int b );
 };
 
 #endif
