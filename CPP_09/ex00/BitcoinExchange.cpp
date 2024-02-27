@@ -1,5 +1,4 @@
 #include "BitcoinExchange.hpp"
-#include <algorithm>
 
 //::::::::::::::::::constructors:::::::::::::::::::::::::
 //filling the internal dataBase
@@ -12,13 +11,13 @@ BitcoinExchange::BitcoinExchange( void ){
 
 	if (!input.is_open()){
 		std::cerr << "\033[0;31mError: Unable to open data base file!\033[0m" << std::endl;
-		exit(0);
+		exit(1);
 	}
 	std::getline(input, line);
 	while(std::getline(input, line)){
-		delimiter = line.find('.');
+		delimiter = line.find(',');
 		price = line.substr(delimiter + 1);
-		this->dataBase[line.substr(0, delimiter)] = toDouble(price);
+		this->dataBase[line.substr(0, delimiter)] = price;
 	}
 	input.close();
 }
@@ -35,13 +34,32 @@ BitcoinExchange& BitcoinExchange::operator=( const BitcoinExchange& rhs ){
 }
 
 //::::::::::::::::::methods:::::::::::::::::::::::::
+//------------------Converter-------------------------
+void	BitcoinExchange::converter( std::string& date, std::string& price ){
+	std::map<std::string, std::string>::iterator it = dataBase.find(date);
+	if (it != dataBase.end()){
+		std::cout << date << " => " << price << " = " << toDouble(price) * toDouble(it->second) << std::endl;
+	}
+	else if (it == dataBase.end()){
+		double	  rate = toDouble((--dataBase.lower_bound(date))->second);
+		std::cout << date << " => " << price << " = " << toDouble(price) * rate << std::endl;
+	}
+}
 
-//------------------helpers-------------------------
+//------------------Helpers-------------------------
 double	  BitcoinExchange::toDouble( const std::string& str ){
 	double	n;
 
 	std::stringstream	ss(str);
-	ss >> n;
+	ss >> n;//TODO: check if the conversion was successfull
+	return (n);
+}
+
+unsigned int	  BitcoinExchange::toUnsigned( const std::string& str ){
+	unsigned int	n;
+
+	std::stringstream	ss(str);
+	ss >> n;//TODO: check if the conversion was successfull
 	return (n);
 }
 
@@ -70,7 +88,7 @@ bool	BitcoinExchange::leapYear( unsigned int day, unsigned int year ){
 	return (true);
 }
 
-//------------------checkers-------------------------
+//------------------Validators-------------------------
 bool	BitcoinExchange::dateIsValid( const std::string& date){
 	if (date.empty() || date.length() != 10){
 		std::cerr << "\033[0;31mError: Bad input => " << date << "\033[0m" << std::endl;
@@ -84,21 +102,14 @@ bool	BitcoinExchange::dateIsValid( const std::string& date){
 	std::string	  year = date.substr(0, 4);
 	std::string	  month = date.substr(5, 2);
 	std::string	  day = date.substr(8, 2);
-	unsigned int			  nYear;
-	unsigned int			  nMonth;
-	unsigned int			  nDay;
 	if (!allDigits(year) || !allDigits(month) || !allDigits(day)){
 		std::cerr << "\033[0;31mError: Bad input => " << date << "\033[0m" << std::endl;
 		return (false);
 	}
 
-    std::stringstream sYear(year);
-    std::stringstream sMonth(month);
-    std::stringstream sDay(day);
-
-	sYear >> nYear;
-	sMonth >> nMonth;
-	sDay >> nDay;
+	unsigned int			  nYear = toUnsigned(year);
+	unsigned int			  nMonth = toUnsigned(month);
+	unsigned int			  nDay = toUnsigned(day);
 	if (nYear > 2022 || nYear < 2009 ||
 		nMonth > 12 || nMonth < 1 ||
 		nDay > 31 || nDay < 1){
@@ -116,7 +127,6 @@ bool	BitcoinExchange::dateIsValid( const std::string& date){
 		std::cerr << "\033[0;31mError: Invalid date => " << date << "\033[0m" << std::endl;
 		return (false);
 	}
-
 	return (true);
 }
 
@@ -151,10 +161,7 @@ bool	BitcoinExchange::priceIsValid( const std::string& price ){
 		std::cerr << "\033[0;31mError: Too large a number!\033[0m" << std::endl;
 		return (false);
 	}
-    std::stringstream sPrice(price);
-	double nPrice;
-	sPrice >> nPrice;
-	if (nPrice > 1000.0){
+	if (toDouble(price) > 1000.0){
 		std::cerr << "\033[0;31mError: Too large a number!\033[0m" << std::endl;
 		return (false);
 	}

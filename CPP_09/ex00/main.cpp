@@ -25,7 +25,7 @@ int	main( int ac, char *av[] ){
 	}
 	while (std::getline(input, line)){
 		size_t	delimiter = line.find('|');
-		if (delimiter == std::string::npos || line.length() < delimiter + 2){
+		if (delimiter == std::string::npos || line.length() < delimiter + 2){//check this condition
 			std::cerr << "\033[0;31mError: Bad input => " << line << "\033[0m" << std::endl;
 			continue ;
 		}
@@ -33,13 +33,8 @@ int	main( int ac, char *av[] ){
 		std::string	  date = btc.trim(line.substr(0, delimiter));
 		if (!btc.dateIsValid(date) || !btc.priceIsValid(price))
 			continue ;
-		std::stringstream sPrice(price);
-		double nPrice;
-		sPrice >> nPrice;
-		std::cout << date << " => " << nPrice << std::endl;
-		// btc.converter(date, nPrice);
+		btc.converter(date, price);
 	}
 	input.close();
-	//TODO: close internal database
 	return (0);
 }

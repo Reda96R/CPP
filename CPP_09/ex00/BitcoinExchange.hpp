@@ -11,7 +11,7 @@
 
 class BitcoinExchange{
 	private:
-		std::map<std::string, float>	dataBase;
+		std::map<std::string, std::string>	dataBase;
 	public:
 		BitcoinExchange( void );
 		BitcoinExchange( const BitcoinExchange& src );
@@ -19,12 +19,16 @@ class BitcoinExchange{
 		~BitcoinExchange( void );
 
 
-		std::string trim( const std::string& str );
-		double		toDouble( const std::string& str );
-		bool		allDigits(const std::string& str);
-		bool		dateIsValid( const std::string& date );
-		bool		priceIsValid( const std::string& price );
-		bool		leapYear( unsigned int day, unsigned int year );
+		unsigned int	  toUnsigned( const std::string& str );
+		double			  toDouble( const std::string& str );
+
+		std::string		  trim( const std::string& str );
+		void			  converter( std::string& date, std::string& price );
+
+		bool			  allDigits(const std::string& str);
+		bool			  dateIsValid( const std::string& date );
+		bool			  priceIsValid( const std::string& price );
+		bool			  leapYear( unsigned int day, unsigned int year );
 };
 
 #endif // !BITCOINEXCHANGE_HPP
