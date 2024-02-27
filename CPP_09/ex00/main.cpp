@@ -37,6 +37,7 @@ int	main( int ac, char *av[] ){
 		double nPrice;
 		sPrice >> nPrice;
 		std::cout << date << " => " << nPrice << std::endl;
+		// btc.converter(date, nPrice);
 	}
 	input.close();
 	//TODO: close internal database
