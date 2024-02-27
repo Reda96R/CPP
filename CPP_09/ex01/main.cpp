@@ -8,5 +8,10 @@ int	main( int ac, char *av[] ){
 		return (1);
 	}
 	RPN	  rpn;
-	rpn.calculator(av[1]);
+	try{
+		rpn.calculator(av[1]);
+	}
+	catch (std::exception& e){
+		std::cerr << "\033[0;31mError: " << e.what() << "\033[0m" << std::endl;
+	}
 }

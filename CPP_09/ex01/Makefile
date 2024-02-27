@@ -1,5 +1,5 @@
 NAME = RPN 
-FILES = main  
+FILES = main RPN 
 OBJS_DIR = .obj/
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
