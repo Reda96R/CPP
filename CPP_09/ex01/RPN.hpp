@@ -20,13 +20,13 @@ class RPN{
 		bool	inputSanitizer( const std::string& input );
 		bool	numberChecker( const std::string& input );
 		bool	allDigits(const std::string& str);
-		int		selecter( const std::string& input );
+		int		selector( const std::string& input );
 		int		toInt( const std::string& str );
 		
-		int		add( int a, int b );
-		int		mult( int a, int b );
-		int		sub( int a, int b );
-		int		div( int a, int b );
+		int		add( int l, int r );
+		int		mul( int l, int r );
+		int		sub( int l, int r );
+		int		div( int l, int r );
 
 		class InvalidInputException : public std::exception{
 			public:
@@ -38,6 +38,11 @@ class RPN{
 		};
 		
 		class InsufficientOperandsException : public std::exception{
+			public:
+				virtual const char* what() const throw();
+		};
+		
+		class TooManyOperandsException : public std::exception{
 			public:
 				virtual const char* what() const throw();
 		};

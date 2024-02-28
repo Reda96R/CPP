@@ -1,7 +1,5 @@
 #include "RPN.hpp"
-#include <cctype>
-#include <sstream>
-#include <string>
+#include <cstddef>
 
 //::::::::::::::::::constructors:::::::::::::::::::::::::
 RPN::RPN( void ){
@@ -31,6 +29,10 @@ const char*	  RPN::InsufficientOperandsException::what() const throw(){
 	return ("Insufficient operands!");
 }
 
+const char*	  RPN::TooManyOperandsException::what() const throw(){
+	return ("Too many operands!");
+}
+
 //::::::::::::::::::methods:::::::::::::::::::::::::
 
 bool  RPN::inputSanitizer( const std::string& input ){
@@ -44,17 +46,19 @@ bool	RPN::numberChecker( const std::string& input ){
 	if (input.length() == 0)
 		return (false);
 	if (input.at(0) == '+' || input.at(0) == '-'){
-		if (input.length() == 1)
+		if (input.length() == 1 || input.at(0) == '-')
 			return (false);
 		i = 1;
 	}
 	while (i < input.length())
 		if (!std::isdigit(input[i++]))
 			return (false);
+	if (toInt(input) >= 10)
+		return (false);
 	return (true);
 }
 
-int	RPN::selecter( const std::string& input ){
+int	RPN::selector( const std::string& input ){
 	std::string			ops[] = {"+", "-", "*", "/"};
 	for (unsigned int i = 0; i < 4; i++)
 	    if (input == ops[i])
@@ -75,19 +79,24 @@ void	RPN::calculator( const std::string& input ){
 
 	std::stringstream	ss(input);
 	std::string			s;
-	int					r;
 	int					l;
+	int					r;
 
 	while (ss >> s){
-		int	  i = selecter(s);
+		int	  i = selector(s);
 		if (i >= 0){
 			if (this->rpnStack.size() < 2)
 				throw (RPN::InsufficientOperandsException());
-			l = this->rpnStack.top();
-			this->rpnStack.pop();
 			r = this->rpnStack.top();
 			this->rpnStack.pop();
-			//TODO: push the operation result
+			l = this->rpnStack.top();
+			this->rpnStack.pop();
+			switch(i){
+				case 0 : this->rpnStack.push(add(l, r)); break ;
+				case 1 : this->rpnStack.push(sub(l, r)); break ;
+				case 2 : this->rpnStack.push(mul(l, r)); break ;
+				case 3 : this->rpnStack.push(div(l, r)); break ;
+			}
 		}
 		else{
 			if (numberChecker(s))
@@ -95,10 +104,10 @@ void	RPN::calculator( const std::string& input ){
 			else
 				throw (RPN::InvalidInputException());
 		}
-		// if (this->rpnStack != 1)
-			//TODO: too many operands exception
-		// std::cout << this->rpnStack.top() << std::endl;
 	}
+	if (this->rpnStack.size() != 1)
+		throw (RPN::TooManyOperandsException());
+	std::cout << this->rpnStack.top() << std::endl;
 }
 
 int	  RPN::toInt( const std::string& str ){
@@ -112,22 +121,22 @@ int	  RPN::toInt( const std::string& str ){
 }
 
 //------------------Operations-------------------------
-int	RPN::add( int a, int b ){
-	return (a + b);
+int	RPN::add( int l, int r ){
+	return (l + r);
 }
 
-int	RPN::mult( int a, int b ){
-	return (a * b);
+int	RPN::mul( int l, int r ){
+	return (l * r);
 }
 
-int	RPN::sub( int a, int b ){
-	return (a - b);
+int	RPN::sub( int l, int r ){
+	return (l - r);
 }
 
-int	RPN::div( int a, int b ){
-	// if (b == 0)
-	// 	throw ();
-	return (a / b);
+int	RPN::div( int l, int r ){
+	if (r == 0)
+		throw (RPN::DivisionByZeroException());
+	return (l / r);
 }
 
 //::::::::::::::::::deconstructor:::::::::::::::::::::::::
