@@ -2,7 +2,7 @@ NAME = PmergeMe
 FILES = main PmergeMe
 OBJS_DIR = .obj/
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
-CPPFLAGS = -Wall -Werror -Wextra -std=c++98
+CPPFLAGS = -g -fsanitize=address -Wall -Werror -Wextra -std=c++98
 CC = c++
 
 all: $(NAME)
