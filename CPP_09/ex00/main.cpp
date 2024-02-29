@@ -6,9 +6,10 @@ int	main( int ac, char *av[] ){
 		std::cerr << "\033[0;32m\tUsage: ./btc <Input.txt>\033[0m" << std::endl;
 		return (1);
 	}
+
 	BitcoinExchange	  btc;
 	std::string		  line;
-    std::ifstream	  input(av[1], std::ifstream::in);
+    std::ifstream	  input(av[1]);
 
 	if (!input.is_open()){
 		std::cerr << "\033[0;31mError: Unable to open " << av[1] << "\033[0m" << std::endl;
@@ -18,14 +19,14 @@ int	main( int ac, char *av[] ){
 		std::cerr << "\033[0;31mError: Empty file!\033[0m" << std::endl;
 		return (1);
 	}
+
 	std::getline(input, line);
 	if (line != "date | value"){
 		std::cerr << "\033[0;31mError: Invalid file format!\033[0m" << std::endl;
-		return (1);
 	}
 	while (std::getline(input, line)){
 		size_t	delimiter = line.find('|');
-		if (delimiter == std::string::npos || line.length() < delimiter + 2){//check this condition
+		if (delimiter == std::string::npos || line.length() < delimiter + 2){
 			std::cerr << "\033[0;31mError: Bad input => " << line << "\033[0m" << std::endl;
 			continue ;
 		}

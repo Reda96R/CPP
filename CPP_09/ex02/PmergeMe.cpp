@@ -23,24 +23,25 @@ PmergeMe<T>::PmergeMe( char *input[] ){
 }
 
 template <typename T>
-PmergeMe<T>::PmergeMe( const PmergeMe& src ){ //TODO fix this
-	(void)src;
+PmergeMe<T>::PmergeMe( const PmergeMe& src ){
+	*this = src;
 }
 
 //::::::::::::::::::operators:::::::::::::::::::::::::
 template <typename T>
-PmergeMe<T>&  PmergeMe<T>::operator=( const PmergeMe& rhs){ //TODO fix this
-	(void)rhs;
+PmergeMe<T>&  PmergeMe<T>::operator=( const PmergeMe& rhs){
+	if (this != &rhs){
+		this->cont = rhs.cont;
+		this->time = rhs.time;
+	}
 	return (*this);
 }
-
-
 
 //::::::::::::::::::Methods:::::::::::::::::::::::::
 template <typename T>
 int	PmergeMe<T>::divideAndConquer( int s, int e, std::vector<int>& medians ){
 	
-	std::sort(medians.begin(), medians.end(), comp(this->cont));// check if comp<int>(this->cont)
+	std::sort(medians.begin(), medians.end(), comp(this->cont));
 	int trueMedian = medians.at(medians.size() / 2);//Index of the true median in this->cont
 
 	std::swap(this->cont[trueMedian], this->cont[e]);
@@ -84,9 +85,8 @@ void	PmergeMe<T>::sorter( int s, int e ){
 		medians.push_back(e);
 
 	int	mid = divideAndConquer(s, e, medians);
-	// (void)mid;
 
-	//----------------------------------repeting for smaller portions------------------------------
+	//----------------------------------repeting for smaller portions-----------------------------
 	sorter(s, mid - 1);
 	sorter(mid, e);
 	this->time = (double)(std::clock() - t0) / CLOCKS_PER_SEC; 
@@ -141,6 +141,6 @@ template <typename T>
 PmergeMe<T>::~PmergeMe( void ){
 }
 
-//TODO: explicit instantiation
+//explicit instantiation
 template class PmergeMe<std::vector<int> >;
 template class PmergeMe<std::deque<int> >;

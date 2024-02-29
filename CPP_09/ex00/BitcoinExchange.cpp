@@ -1,19 +1,25 @@
 #include "BitcoinExchange.hpp"
 
 //::::::::::::::::::constructors:::::::::::::::::::::::::
-//filling the internal dataBase
 BitcoinExchange::BitcoinExchange( void ){
 	size_t			delimiter;
 	std::string		line;
 	std::string		date;
 	std::string		price;
-    std::ifstream	input("data.csv", std::ifstream::in);
+    std::ifstream	input("data.csv");
 
 	if (!input.is_open()){
 		std::cerr << "\033[0;31mError: Unable to open data base file!\033[0m" << std::endl;
 		exit(1);
 	}
+	if (input.peek() == std::ifstream::traits_type::eof()){
+		std::cerr << "\033[0;31mError: Empty data base!\033[0m" << std::endl;
+		exit (1);
+	}
 	std::getline(input, line);
+	if (line != "date,exchange_rate"){
+		std::cerr << "\033[0;31mError: Invalid data base format!\033[0m" << std::endl;
+	}
 	while(std::getline(input, line)){
 		delimiter = line.find(',');
 		price = line.substr(delimiter + 1);
@@ -51,7 +57,11 @@ double	  BitcoinExchange::toDouble( const std::string& str ){
 	double	n;
 
 	std::stringstream	ss(str);
-	ss >> n;//TODO: check if the conversion was successfull
+	ss >> n;
+	if (ss.fail()){
+		std::cerr << "\033[0;31mError: Conversion failed" << "\033[0m" << std::endl;
+		exit (1);
+	}
 	return (n);
 }
 
@@ -59,7 +69,11 @@ unsigned int	  BitcoinExchange::toUnsigned( const std::string& str ){
 	unsigned int	n;
 
 	std::stringstream	ss(str);
-	ss >> n;//TODO: check if the conversion was successfull
+	ss >> n;
+	if (ss.fail()){
+		std::cerr << "\033[0;31mError: Conversion failed" << "\033[0m" << std::endl;
+		exit (1);
+	}
 	return (n);
 }
 
@@ -161,7 +175,7 @@ bool	BitcoinExchange::priceIsValid( const std::string& price ){
 		std::cerr << "\033[0;31mError: Too large a number!\033[0m" << std::endl;
 		return (false);
 	}
-	if (toDouble(price) > 1000.0){
+	if (toDouble(price) > 1000){
 		std::cerr << "\033[0;31mError: Too large a number!\033[0m" << std::endl;
 		return (false);
 	}

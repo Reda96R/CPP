@@ -1,5 +1,4 @@
 #include "RPN.hpp"
-#include <cstddef>
 
 //::::::::::::::::::constructors:::::::::::::::::::::::::
 RPN::RPN( void ){
@@ -16,7 +15,7 @@ RPN& RPN::operator=( const RPN& rhs ){
 	return (*this);
 }
 
-//::::::::::::::::::methods:::::::::::::::::::::::::
+//::::::::::::::::::exceptions:::::::::::::::::::::::::
 const char*	  RPN::InvalidInputException::what() const throw(){
 	return ("Invalid Input");
 }

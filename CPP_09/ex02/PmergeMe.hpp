@@ -38,13 +38,13 @@ class PmergeMe {
 		int			  toInt( const std::string& str );
 
 
-		typename T::const_iterator begin() const {
-			return cont.begin();
-		}
-		typename T::const_iterator end() const {
-			return cont.end();
-		}
-		typedef typename T::const_iterator const_iterator; //TODO: why we need this?
+		// typename T::const_iterator begin() const {
+		// 	return cont.begin();
+		// }
+		// typename T::const_iterator end() const {
+		// 	return cont.end();
+		// }
+		// typedef typename T::const_iterator const_iterator;
 };
 
 #endif
